@@ -435,7 +435,7 @@ ENTRYPOINT ./goapp
 
 `docker build -t buildando:1.0 -f Dockerfile2 .`
 
-![Buildando]('.images/buildando.png')
+![Buildando]('./images/buildando.png')
 
 Veja que o container `buildando` utiliza a infraestrutura do container `goapp`, assim o container `buildando` não precisa importar toda a infraestrutura para a linguagem do `go`, ficando dessa forma, bem mais leve.
 
