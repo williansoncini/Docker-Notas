@@ -1,16 +1,78 @@
+> Notas de estudos lendo o livro: Descomplicando o docker 2
+
+Fique a vontade para contribuir com anotações também 🚀
+
+- [DOCKER](#docker)
+  - [`Para realizar a instalação do docker, consultar o guia da documentação oficial`](#para-realizar-a-instalação-do-docker-consultar-o-guia-da-documentação-oficial)
+- [Estudos utilizando linux](#estudos-utilizando-linux)
+  - [Adicionar usuário ao grupo do docker](#adicionar-usuário-ao-grupo-do-docker)
+  - [Iniciar o docker](#iniciar-o-docker)
+  - [Listar imagens](#listar-imagens)
+- [CONTAINER](#container)
+  - [Listar containers](#listar-containers)
+  - [Iniciando um container](#iniciando-um-container)
+  - [**Rodar um container**](#rodar-um-container)
+  - [Criar um container mas não roda-lo instantaneamente](#criar-um-container-mas-não-roda-lo-instantaneamente)
+  - [Entrar em um container](#entrar-em-um-container)
+  - [Subindo container](#subindo-container)
+  - [Parando o container](#parando-o-container)
+  - [Reiniciando o container](#reiniciando-o-container)
+  - [Pausando um container](#pausando-um-container)
+  - [Despausando um container](#despausando-um-container)
+  - [Visualizar consumo de recursos](#visualizar-consumo-de-recursos)
+  - [Mostrar os processos dentro de um container](#mostrar-os-processos-dentro-de-um-container)
+  - [Logs](#logs)
+  - [Ficar mostrando os logs ao vivo](#ficar-mostrando-os-logs-ao-vivo)
+  - [Remover o container](#remover-o-container)
+  - [Inspecionar um container](#inspecionar-um-container)
+  - [Especificando recursos do container](#especificando-recursos-do-container)
+  - [Alterar os recursos do container em execução](#alterar-os-recursos-do-container-em-execução)
+- [DOCKERFILE](#dockerfile)
+  - [primeiro docker file](#primeiro-docker-file)
+  - [Criar uma imagem a partir do Dockerfile](#criar-uma-imagem-a-partir-do-dockerfile)
+- [Volumes](#volumes)
+  - [Criando e montando um DATA-ONLY CONTAINER](#criando-e-montando-um-data-only-container)
+  - [Backups](#backups)
+- [GERENCIANDO IMAGENS](#gerenciando-imagens)
+  - [Dockerfile](#dockerfile-1)
+  - [Algumas opções do dockerfile](#algumas-opções-do-dockerfile)
+  - [Multi-Stage (Método bem utilizado)](#multi-stage-método-bem-utilizado)
+  - [Customizando uma imagem base](#customizando-uma-imagem-base)
+- [COMPARTILHANDO IMAGENS](#compartilhando-imagens)
+  - [Docker hub](#docker-hub)
+  - [Criando um registry local](#criando-um-registry-local)
+- [GERENCIANDO A REDE DOS CONTAINERS](#gerenciando-a-rede-dos-containers)
+  - [Daemon](#daemon)
+  - [Sockets](#sockets)
+- [OPÇÕES DE STORAGE](#opções-de-storage)
+- [OPÇÕES DE REDE](#opções-de-rede)
+- [OPÇÕES DIVERSAS](#opções-diversas)
+- [Docker Machine (Deprecated) - Não consegui fazer funcionar](#docker-machine-deprecated---não-consegui-fazer-funcionar)
+- [DOCKER SWARM](#docker-swarm)
+- [**SERVICES**](#services)
+- [SECRETS (Usada com docker swarm (Serviços))](#secrets-usada-com-docker-swarm-serviços)
+- [DOCKER COMPOSE](#docker-compose)
+- [Exemplos](#exemplos)
+  - [`Primeiro exemplo`](#primeiro-exemplo)
+  - [`Segundo exemplo`](#segundo-exemplo)
+  - [`Terceiro exemplo`](#terceiro-exemplo)
+  - [`Quarto exemplo`](#quarto-exemplo)
+  - [`Quinto exemplo`](#quinto-exemplo)
+- [LINKS UTEIS](#links-uteis)
+
 # DOCKER
 
-### `Para realizar a instalação do docker, consultar o guia da documentação oficial`
+## `Para realizar a instalação do docker, consultar o guia da documentação oficial`
 
-## Estudos utilizando linux
+# Estudos utilizando linux
 
-### Adicionar usuário ao grupo do docker
+## Adicionar usuário ao grupo do docker
 
 ```bash
 sudo usermod -a -G docker <name>
 ```
 
-### Iniciar o docker
+## Iniciar o docker
 
 ```bash
 sudo /etc/init.d/docker
@@ -18,7 +80,7 @@ sudo /etc/init.d/docker
 service docker start
 ```
 
-### Listar imagens
+## Listar imagens
 
 ```bash
 docker image ls
@@ -26,7 +88,7 @@ docker image ls
 
 # CONTAINER
 
-### Listar containers
+## Listar containers
 
 ```bash
 #Listar containers ativos
@@ -35,7 +97,7 @@ docker container ls
 docker container ls -a
 ```
 
-### Iniciando um container
+## Iniciando um container
 
 **Parâmetros**
 
@@ -45,7 +107,7 @@ docker container ls -a
 
 `d` – Faz com que o container rode como um daemon , ou seja, sem a interatividade que os outros dois parâmetros nos fornecem. Com isso temos dois modos de execução de nossos containers : modo interativo ou daemonizando o container .
 
-### **Rodar um container**
+## **Rodar um container**
 
 ```bash
 #rodar em modo iterativo
@@ -58,79 +120,79 @@ docker container run -ti --name teste centos:7
 
 **Para sair do modo iterativo pressione** `CTRL+P+Q`
 
-### Criar um container mas não roda-lo instantaneamente
+## Criar um container mas não roda-lo instantaneamente
 
 ```bash
 docker container create -ti ubuntu
 ```
 
-### Entrar em um container
+## Entrar em um container
 
 ```docker
 docker container attach container_id
 ```
 
-### Subindo container
+## Subindo container
 
 ```bash
 docker container start container_id
 ```
 
-### Parando o container
+## Parando o container
 
 ```bash
 coder container stop container_id
 ```
 
-### Reiniciando o container
+## Reiniciando o container
 
 ```bash
 docker container restart donctainer_id
 ```
 
-### Pausando um container
+## Pausando um container
 
 ```bash
 docker container pause container_id
 ```
 
-### Despausando um container
+## Despausando um container
 
 ```bash
 docker container unpause container_id
 ```
 
-### Visualizar consumo de recursos
+## Visualizar consumo de recursos
 
 ```bash
 docker container stats container_id
 ```
 
-### Mostrar os processos dentro de um container
+## Mostrar os processos dentro de um container
 
 ```bash
 docker container top container_id
 ```
 
-### Logs
+## Logs
 
 ```bash
 docker container logs container_id
 ```
 
-### Ficar mostrando os logs ao vivo
+## Ficar mostrando os logs ao vivo
 
 ```bash
 docker container logs -f container_id
 ```
 
-### Remover o container
+## Remover o container
 
 ```bash
 docker container rm container_id
 ```
 
-### Inspecionar um container
+## Inspecionar um container
 
 ```bash
 docker container inspect name_container
@@ -140,14 +202,14 @@ docker container inspect name_container | grep -i mem
 docker container inspect name_container | grep  -i cpu
 ```
 
-### Especificando recursos do container
+## Especificando recursos do container
 
 ```bash
 docker container run -ti -m 512M --name container_name debian
 docker container run -ti -cpus=0.5 --name container_name nginx
 ```
 
-### Alterar os recursos do container em execução
+## Alterar os recursos do container em execução
 
 ```bash
 docker container update --cpus=4 -m 512M container_name
@@ -155,7 +217,7 @@ docker container update --cpus=4 -m 512M container_name
 
 # DOCKERFILE
 
-### primeiro docker file
+## primeiro docker file
 
 ```bash
 vim Dockerfile
@@ -166,7 +228,7 @@ FROM debian
 RUN /bin/echo "Hello World!"
 ```
 
-### Criar uma imagem a partir do Dockerfile
+## Criar uma imagem a partir do Dockerfile
 
 ```bash
 docker build -t name:1.0 [path do arquivo docker]
@@ -221,7 +283,7 @@ Para localizar o volume
 docker volume inspect --format '{{.Mountpoint}}' <name>
 ```
 
-### Criando e montando um DATA-ONLY CONTAINER
+## Criando e montando um DATA-ONLY CONTAINER
 
 A principal função desse container é prover volumes para outros containers
 
@@ -246,7 +308,7 @@ docker run -d -p 5433:5432 --name pgsql2 --volumes-from dbdados \
 -e POSTGRESQL_DB=docker kamui/postgresql
 ```
 
-### Backups
+## Backups
 
 ```bash
 cd backup/
@@ -259,7 +321,7 @@ docker run -ti --volumes-from dbdados -v $(pwd):/backup debian tar -cvf /backup/
 
 Se pode utilizar o docker hub para buscar imagens
 
-### Dockerfile
+## Dockerfile
 
 Exemplo de docker file
 
@@ -293,7 +355,7 @@ ps -ef
 /sbin/ip route|awk '/default/ { print $3 }'
 ```
 
-### Algumas opções do dockerfile
+## Algumas opções do dockerfile
 
 ```docker
 ADD Permite adcionar alguma pasta/arquivo do host para o container
@@ -320,7 +382,7 @@ ENTRYPOINT [”/usr/sbin/apachectl”]
 CMD ["-D","FOREGROUND"]
 ```
 
-### Multi-Stage (Método bem utilizado)
+## Multi-Stage (Método bem utilizado)
 
 Utilizado como ponte entre imagens, utilizando o multi-stage é possível referenciar outras imagens  para utilizar de sua infraestrutura. Assim as imagens não precisaram sempre importar toda a infraestrutura de uma linguagem, por exemplo, Java, C, Go e etc...
 
@@ -373,11 +435,11 @@ ENTRYPOINT ./goapp
 
 `docker build -t buildando:1.0 -f Dockerfile2 .`
 
-![Untitled](DOCKER%2053861469b09b42d792c9089cfb06e75c/Untitled.png)
+![Buildando]('.images/buildando.png')
 
 Veja que o container `buildando` utiliza a infraestrutura do container `goapp`, assim o container `buildando` não precisa importar toda a infraestrutura para a linguagem do `go`, ficando dessa forma, bem mais leve.
 
-### Customizando uma imagem base
+## Customizando uma imagem base
 
 Demonstração de modificação de imagem
 
@@ -412,7 +474,7 @@ docker history image_id
 
 Existem sites para inspecionar as camadas de imagens
 
-### Docker hub
+## Docker hub
 
 [Docker Hub Container Image Library | App Containerization](https://hub.docker.com/)
 
@@ -440,7 +502,7 @@ Fazendo busca pela imagem
 
 `docker pull seuusuario/nomedaimagem:versão`
 
-### Criando um registry local
+## Criando um registry local
 
 <aside>
 💡 Utilizado em locais que não desejam utilizar alguma registry web, por exemplo o docker hub. Utilizamos nesse caso o Docker Distribuition
@@ -485,7 +547,7 @@ Rodando o comando da seguinte forma, utilizando a opção `-p`
 
 exemplo: `docker container run -ti -p 8080:80 apache`
 
-### Daemon
+## Daemon
 
 Daemon é um software que roda no background do docker como um processo pai. Ele controla tudo, desde containers a imagens e etc...
 
@@ -493,7 +555,7 @@ Para se alterar configurações do daemon, é necessário utilizar o `dockerd`
 
 [dockerd](https://docs.docker.com/engine/reference/commandline/dockerd/)
 
-### Sockets
+## Sockets
 
 Podem ser utilizadas três opções de sockets (UNIX, TCP, FD), por padrão se utiliza o UNIX. Como o daemon só pode ser acessado localmente, para resolver isso se utiliza o TCP.
 
@@ -521,7 +583,6 @@ Para alterar o thin-pool que ele usa para criar os snapshots, containers e image
 
 <aside>
 💡 Alerta! É preciso deletar imagens, containers e reiniciar o serviço do docker.
-
 </aside>
 
 Através do parâmetro `dm.basesize` é possível definir o tamanho máximo do container
@@ -812,6 +873,8 @@ para checar se o `docker-compose.yml` é um arquivo valido rode o seguinte coman
 ```yaml
 docker-compose -f docker-compose.yml config
 ```
+
+# Exemplos
 
 ## `Primeiro exemplo`
 
