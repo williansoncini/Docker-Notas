@@ -14,6 +14,7 @@ Fique a vontade para contribuir com anotações também 🚀
   - [**Rodar um container**](#rodar-um-container)
   - [Criar um container mas não roda-lo instantaneamente](#criar-um-container-mas-não-roda-lo-instantaneamente)
   - [Entrar em um container](#entrar-em-um-container)
+  - [Pegar o bash de um container](#pegar-o-bash-de-um-container)
   - [Subindo container](#subindo-container)
   - [Parando o container](#parando-o-container)
   - [Reiniciando o container](#reiniciando-o-container)
@@ -131,6 +132,14 @@ docker container create -ti ubuntu
 ```docker
 docker container attach container_id
 ```
+
+## Pegar o bash de um container
+
+```shell
+docker --exec -t container_id /bin/bash
+```
+
+[IBM - docker](https://www.ibm.com/docs/en/workload-automation/9.5.0?topic=compose-accessing-docker-containers)
 
 ## Subindo container
 
