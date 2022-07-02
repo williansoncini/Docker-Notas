@@ -136,7 +136,7 @@ docker container attach container_id
 ## Pegar o bash de um container
 
 ```shell
-docker --exec -t container_id /bin/bash
+docker exec -t container_id /bin/bash
 ```
 
 [IBM - docker](https://www.ibm.com/docs/en/workload-automation/9.5.0?topic=compose-accessing-docker-containers)
